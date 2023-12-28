@@ -1,0 +1,30 @@
+.image_container {
+  margin-bottom: 24px;
+  height: 300px;
+  width: 375px;
+  position: relative;
+  border: 1px solid var(--white);
+  border-radius: 4px;
+}
+
+.image_blur {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+  z-index: 75;
+  transition: all 75ms ease-in-out;
+}
+
+.image_container > img {
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 95%;
+  width: auto;
+  padding: 16px 0;
+  z-index: 50;
+}
