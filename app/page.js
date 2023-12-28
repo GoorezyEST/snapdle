@@ -2,12 +2,19 @@
 
 import styles from "@/styles/modules/home.module.css";
 import { useState, useEffect } from "react";
-import GuessByHints from "./components/GuessByHints";
+import { useGlobal } from "@/contexts/GlobalContext";
 
 export default function Home() {
+  const { setIsHydrated } = useGlobal();
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
   return (
     <main>
-      <GuessByHints />
+      Home page:
+      <a href="/classic-mode">Classic mode</a>
     </main>
   );
 }
