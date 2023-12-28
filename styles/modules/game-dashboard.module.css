@@ -1,0 +1,80 @@
+.information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 375px;
+}
+
+.health {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.health_item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.streak > p {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.streak > p > span {
+  color: var(--white);
+}
+
+.reroll_cta {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  background-color: var(--accent);
+  color: var(--white);
+  transition: filter 200ms ease-in-out;
+  cursor: pointer;
+}
+
+.reroll_cta:disabled {
+  filter: grayscale(1);
+  cursor: not-allowed;
+}
+
+.reroll_cta > svg > path {
+  fill: var(--white);
+}
+
+.health_item > svg > path {
+  fill: red;
+}
+
+.health_item_lost > svg > path {
+  animation: shake 0.5s ease-in-out forwards;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25%,
+  50%,
+  75% {
+    transform: translateX(-2px);
+  }
+  37.5%,
+  62.5% {
+    transform: translateX(2px);
+  }
+  95% {
+    transform: translateX(0);
+  }
+  100% {
+    fill: black;
+  }
+}
