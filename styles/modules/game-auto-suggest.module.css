@@ -1,0 +1,37 @@
+.autosuggest {
+  margin-top: 24px;
+  width: 375px;
+}
+
+.autosuggest input {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--black);
+  background-color: var(--white);
+  outline: none;
+  border: none;
+  padding: 8px;
+  position: relative;
+  border-radius: 4px;
+}
+
+.autosuggest > div {
+  position: relative;
+}
+
+.autosuggest > div > div:last-child {
+  top: calc(35px + 8px);
+  left: 0;
+  width: 100%;
+  position: absolute;
+  border-radius: 4px;
+  max-height: 60px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.suggestion {
+  background-color: var(--white);
+  width: 100%;
+  padding: 4px 8px;
+}
