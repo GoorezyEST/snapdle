@@ -10,11 +10,13 @@ function LoadingScreen({ children }) {
   return (
     <>
       {!isHydrated && (
-        <div className="loading">
-          <div className="loading_logo">
-            <MainLogo />
+        <div className="loading_wrapper">
+          <div className="loading">
+            <div className="loading_logo">
+              <MainLogo />
+            </div>
+            <span className="loading_loader"></span>
           </div>
-          <span className="loading_loader"></span>
         </div>
       )}
       {children}

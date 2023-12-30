@@ -6,9 +6,14 @@
 
 :root {
   --black: hsla(257, 78%, 7%, 1);
+  --black-op: hsla(257, 78%, 7%, 0.75);
   --white: hsla(227, 46%, 97%, 1);
   --accent-light: hsla(250, 52%, 45%, 1);
   --accent: rgb(77, 46, 236);
+}
+
+body {
+  background-color: #0f0f0f;
 }
 
 h2,
@@ -33,28 +38,91 @@ span {
   border-radius: 4px;
 }
 
-.loading {
+/* CTAS STYLING */
+
+.primary_cta,
+.secondary_cta {
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--white);
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.primary_cta {
+  background: linear-gradient(
+    45deg,
+    #3a2b93 0%,
+    #513db2 20%,
+    #513db2 80%,
+    #3a2b93 100%
+  );
+  box-shadow: none;
+  transition: box-shadow 200ms ease-in-out;
+}
+
+.primary_cta:hover {
+  box-shadow: 0 0 8px rgba(122, 102, 218, 0.25),
+    0 0 16px rgba(141, 124, 224, 0.45);
+}
+
+.secondary_cta {
+  background: linear-gradient(
+    45deg,
+    #3a2b93 0%,
+    #513db2 20%,
+    #513db2 80%,
+    #3a2b93 100%
+  );
+  box-shadow: none;
+  transition: box-shadow 200ms ease-in-out;
+}
+
+.secondary_cta:hover {
+  box-shadow: 0 0 8px rgba(122, 102, 218, 0.25),
+    0 0 16px rgba(141, 124, 224, 0.45);
+}
+
+/* LOADING SCREEN STYLING */
+
+.loading_wrapper {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
+  background-color: rgb(15, 15, 15);
+  z-index: 2500;
+  display: flex;
+  justify-content: center;
+}
+
+.loading {
+  width: 100%;
+  max-width: 550px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 48px;
+  gap: 24px;
   background: radial-gradient(
     circle,
-    rgba(15, 6, 65, 1) 20%,
-    rgba(12, 5, 52, 1) 40%,
-    rgba(9, 4, 39, 1) 60%,
-    rgba(6, 2, 26, 1) 80%
+    #201557 20%,
+    #191044 40%,
+    #120b30 60%,
+    #0b071d 80%
   );
 }
 
 .loading_logo {
-  width: 375px;
+  width: 275px;
 }
 
 .loading_logo > svg {
@@ -73,7 +141,7 @@ span {
 }
 .loading_loader {
   color: var(--white);
-  font-size: 5px;
+  font-size: 2px;
   position: relative;
   text-indent: -9999em;
   transform: translateZ(0);
