@@ -26,8 +26,9 @@
   width: 100%;
   position: absolute;
   border-radius: 4px;
-  max-height: 60px; /* Adjust the height as needed */
+  max-height: 85px; /* Adjust the height as needed */
   overflow-y: auto;
+  z-index: 750;
 }
 
 .suggestion {
