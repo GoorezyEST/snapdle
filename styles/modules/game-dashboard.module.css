@@ -28,6 +28,7 @@
 }
 
 .reroll_cta {
+  width: max-content;
   padding: 8px;
   display: flex;
   justify-content: center;
@@ -35,10 +36,22 @@
   border-radius: 4px;
   outline: none;
   border: none;
-  background-color: var(--accent);
+  background: linear-gradient(
+    45deg,
+    #3a2b93 0%,
+    #513db2 20%,
+    #513db2 80%,
+    #3a2b93 100%
+  );
+  box-shadow: none;
   color: var(--white);
-  transition: filter 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
   cursor: pointer;
+}
+
+.reroll_cta:not(:disabled):hover {
+  box-shadow: 0 0 8px rgba(122, 102, 218, 0.25),
+    0 0 16px rgba(141, 124, 224, 0.45);
 }
 
 .reroll_cta:disabled {

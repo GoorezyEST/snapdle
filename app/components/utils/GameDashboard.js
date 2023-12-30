@@ -1,5 +1,5 @@
 import { useGlobal } from "@/contexts/GlobalContext";
-import React from "react";
+import React, { useMemo } from "react";
 
 import styles from "@/styles/modules/game-dashboard.module.css";
 import { HealthPoint } from "../icons/HealthPoint";
@@ -16,6 +16,7 @@ function GameDashboard() {
     setRandomCard,
     guessedCardsMap,
     setGuessedCardsMap,
+    retrieveMutedEffects,
   } = useGlobal();
 
   const generateRandomCard = () => {
@@ -28,6 +29,40 @@ function GameDashboard() {
       const newRandomCard =
         availableCards[Math.floor(Math.random() * availableCards.length)];
       setRandomCard(newRandomCard);
+    }
+  };
+
+  const clickSound = useMemo(
+    () =>
+      new Howl({
+        src: ["/audio/re-roll.ogg"],
+        volume: 0.03,
+      }),
+    []
+  );
+
+  const handleClickSound = (callback) => {
+    if (!retrieveMutedEffects()) {
+      clickSound.play();
+    }
+
+    if (callback) {
+      callback();
+    }
+  };
+
+  const hoverSound = useMemo(
+    () =>
+      new Howl({
+        src: ["/audio/menu-hover.ogg"],
+        volume: 0.02,
+      }),
+    []
+  );
+
+  const handleBtnHover = () => {
+    if (!retrieveMutedEffects()) {
+      hoverSound.play();
     }
   };
 
@@ -63,9 +98,12 @@ function GameDashboard() {
         </p>
       </div>
       <button
-        onClick={reRoll}
+        onMouseEnter={handleBtnHover}
+        onClick={() => {
+          handleClickSound(reRoll);
+        }}
         disabled={usedReRoll}
-        className={styles.reroll_cta}
+        className={`${styles.reroll_cta}`}
       >
         <ReRollIcon />
       </button>
