@@ -128,58 +128,54 @@ function GuessByHints() {
 
   return (
     <section className={styles.wrapper}>
-      {randomCard === null ? (
-        <></>
-      ) : (
-        <div className={styles.container}>
-          {userLoses && <GameLoseModal />}
-          <div className={styles.game_container_wrapper}>
-            <img
-              className={styles.game_container_image}
-              src="https://i.imgur.com/P63TZaA.jpg"
-              alt="Background image"
-            />
-            <ul className={styles.game_settings}>
-              <li>
-                <span
-                  onClick={() => handleClickSound(handleMusicToggle)}
-                  onMouseEnter={handleBtnHover}
-                >
-                  <button className="primary_cta">
-                    {isMusicMuted ? <MusicOff /> : <MusicOn />}
-                  </button>
-                </span>
-              </li>
-              <li>
-                <span
-                  onClick={() => handleClickSound(handleEffectsToggle)}
-                  onMouseEnter={handleBtnHover}
-                >
-                  <button className="primary_cta">
-                    {areEffectsMuted ? <SoundOff /> : <SoundOn />}
-                  </button>
-                </span>
-              </li>
-              <li>
-                <a
-                  href="/"
-                  onClick={() => handleClickSound()}
-                  onMouseEnter={handleBtnHover}
-                >
-                  <button className="primary_cta">
-                    <Return />
-                  </button>
-                </a>
-              </li>
-            </ul>
-            <div className={styles.game_container}>
-              <GameImageHint />
-              <GameDashboard />
-              <GameAutoSuggest />
-            </div>
+      <div className={styles.container}>
+        {userLoses && <GameLoseModal />}
+        <div className={styles.game_container_wrapper}>
+          <img
+            className={styles.game_container_image}
+            src="https://i.imgur.com/P63TZaA.jpg"
+            alt="Background image"
+          />
+          <ul className={styles.game_settings}>
+            <li>
+              <span
+                onClick={() => handleClickSound(handleMusicToggle)}
+                onMouseEnter={handleBtnHover}
+              >
+                <button className="primary_cta">
+                  {isMusicMuted ? <MusicOff /> : <MusicOn />}
+                </button>
+              </span>
+            </li>
+            <li>
+              <span
+                onClick={() => handleClickSound(handleEffectsToggle)}
+                onMouseEnter={handleBtnHover}
+              >
+                <button className="primary_cta">
+                  {areEffectsMuted ? <SoundOff /> : <SoundOn />}
+                </button>
+              </span>
+            </li>
+            <li>
+              <a
+                href="/"
+                onClick={() => handleClickSound()}
+                onMouseEnter={handleBtnHover}
+              >
+                <button className="primary_cta">
+                  <Return />
+                </button>
+              </a>
+            </li>
+          </ul>
+          <div className={styles.game_container}>
+            <GameImageHint />
+            <GameDashboard />
+            <GameAutoSuggest />
           </div>
         </div>
-      )}
+      </div>
     </section>
   );
 }
