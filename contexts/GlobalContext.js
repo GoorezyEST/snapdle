@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 import { retrieveCards } from "@/functions/getAllCards";
+import { Howl, Howler } from "howler";
 
 const GlobalContext = createContext();
 
@@ -54,6 +55,10 @@ export function GlobalProvider({ children }) {
 
     if (suggestion.cid === randomCard.cid) {
       // Update the guessed cards map
+      if (!retrieveMutedEffects()) {
+        songsAndEffects.correctAnswerEffect.play();
+      }
+
       setGuessedCardsMap((prevMap) => ({
         ...prevMap,
         [suggestion.cid]: true,
@@ -69,6 +74,10 @@ export function GlobalProvider({ children }) {
       }, 1000);
     }
     if (suggestion.cid !== randomCard.cid) {
+      if (!retrieveMutedEffects()) {
+        songsAndEffects.gameLose.play();
+      }
+
       if (hp.lastIndexOf(true) !== 0) {
         setGuessedCardsMap((prevMap) => ({
           ...prevMap,
@@ -145,6 +154,52 @@ export function GlobalProvider({ children }) {
     generateRandomCard();
   };
 
+  //Object to store all the audio effects used through the game
+  const songsAndEffects = {
+    correctAnswerEffect: new Howl({
+      src: ["/audio/correct-answer.ogg"],
+      volume: 0.02,
+    }),
+    gameLose: new Howl({
+      src: ["/audio/game-lose.ogg"],
+      volume: 0.02,
+    }),
+    reRollEffect: new Howl({
+      src: ["/audio/re-roll.ogg"],
+      volume: 0.02,
+    }),
+  };
+
+  const toggleMutedMusic = (param) => {
+    localStorage.setItem("Snapdle.Music", JSON.stringify(param));
+  };
+
+  const retrieveMutedMusic = () => {
+    return JSON.parse(localStorage.getItem("Snapdle.Music"));
+  };
+
+  const toggleMutedEffects = (param) => {
+    localStorage.setItem("Snapdle.Effects", JSON.stringify(param));
+  };
+
+  const retrieveMutedEffects = () => {
+    return JSON.parse(localStorage.getItem("Snapdle.Effects"));
+  };
+
+  useEffect(() => {
+    let musicKey = localStorage.getItem("Snapdle.Music") !== null;
+
+    if (!musicKey) {
+      localStorage.setItem("Snapdle.Music", JSON.stringify(false));
+    }
+
+    let effectsKey = localStorage.getItem("Snapdle.Effects") !== null;
+
+    if (!effectsKey) {
+      localStorage.setItem("Snapdle.Effects", JSON.stringify(false));
+    }
+  }, []);
+
   return (
     <GlobalContext.Provider
       value={{
@@ -177,6 +232,11 @@ export function GlobalProvider({ children }) {
         userLoses,
         setUserLoses,
         handleUserRestart,
+        songsAndEffects,
+        toggleMutedMusic,
+        retrieveMutedMusic,
+        toggleMutedEffects,
+        retrieveMutedEffects,
       }}
     >
       {children}
