@@ -170,33 +170,58 @@ export function GlobalProvider({ children }) {
     }),
   };
 
+  // Function to check if localStorage is available
+  const isLocalStorageAvailable = () => {
+    try {
+      const testKey = "__test__";
+      localStorage.setItem(testKey, testKey);
+      localStorage.removeItem(testKey);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+
+  // Use the isLocalStorageAvailable function before accessing localStorage
   const toggleMutedMusic = (param) => {
-    localStorage.setItem("Snapdle.Music", JSON.stringify(param));
+    if (isLocalStorageAvailable()) {
+      localStorage.setItem("Snapdle.Music", JSON.stringify(param));
+    }
   };
 
   const retrieveMutedMusic = () => {
-    return JSON.parse(localStorage.getItem("Snapdle.Music"));
+    if (isLocalStorageAvailable()) {
+      return JSON.parse(localStorage.getItem("Snapdle.Music"));
+    }
   };
 
   const toggleMutedEffects = (param) => {
-    localStorage.setItem("Snapdle.Effects", JSON.stringify(param));
+    if (isLocalStorageAvailable()) {
+      localStorage.setItem("Snapdle.Effects", JSON.stringify(param));
+    }
   };
 
   const retrieveMutedEffects = () => {
-    return JSON.parse(localStorage.getItem("Snapdle.Effects"));
+    if (isLocalStorageAvailable()) {
+      return JSON.parse(localStorage.getItem("Snapdle.Effects"));
+    }
   };
 
   useEffect(() => {
-    let musicKey = localStorage.getItem("Snapdle.Music") !== null;
+    let musicKey =
+      isLocalStorageAvailable() &&
+      localStorage.getItem("Snapdle.Music") !== null;
 
     if (!musicKey) {
-      localStorage.setItem("Snapdle.Music", JSON.stringify(false));
+      toggleMutedMusic(false);
     }
 
-    let effectsKey = localStorage.getItem("Snapdle.Effects") !== null;
+    let effectsKey =
+      isLocalStorageAvailable() &&
+      localStorage.getItem("Snapdle.Effects") !== null;
 
     if (!effectsKey) {
-      localStorage.setItem("Snapdle.Effects", JSON.stringify(false));
+      toggleMutedEffects(false);
     }
   }, []);
 
