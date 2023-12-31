@@ -132,7 +132,7 @@ function GameMenu() {
               </li>
               <li>
                 <a
-                  href="/classic-mode"
+                  href="/skills-mode"
                   onClick={() => handleClickSound()}
                   onMouseEnter={handleBtnHover}
                 >
