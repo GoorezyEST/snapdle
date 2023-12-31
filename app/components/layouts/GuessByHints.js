@@ -45,8 +45,6 @@ function GuessByHints() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    setIsHydrated(true);
-
     if (!retrieveMutedMusic()) {
       menuMusic.play();
       setIsPlaying(true);
