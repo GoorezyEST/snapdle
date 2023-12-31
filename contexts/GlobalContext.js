@@ -262,6 +262,7 @@ export function GlobalProvider({ children }) {
         retrieveMutedMusic,
         toggleMutedEffects,
         retrieveMutedEffects,
+        setGuessedCardsMap,
       }}
     >
       {children}
