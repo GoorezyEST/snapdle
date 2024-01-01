@@ -22,7 +22,6 @@ function GameSkillHint() {
         generateRandomCard();
         return;
       }
-      console.log(randomCard.name);
 
       setSkill(randomCard.ability);
     }
