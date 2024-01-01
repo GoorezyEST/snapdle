@@ -12,16 +12,23 @@ import SoundOn from "../icons/SoundOn";
 import Return from "../icons/Return";
 
 function GuessByHints() {
-  const {
-    cardsList,
-    randomCard,
-    setRandomCard,
-    userLoses,
-    toggleMutedMusic,
-    retrieveMutedMusic,
-    toggleMutedEffects,
-    retrieveMutedEffects,
-  } = useGlobal();
+  const { cardsList, randomCard, setRandomCard, userLoses } = useGlobal();
+
+  const toggleMutedMusic = (param) => {
+    localStorage.setItem("Snapdle.Music", JSON.stringify(param));
+  };
+
+  const retrieveMutedMusic = () => {
+    return JSON.parse(localStorage.getItem("Snapdle.Music"));
+  };
+
+  const toggleMutedEffects = (param) => {
+    localStorage.setItem("Snapdle.Effects", JSON.stringify(param));
+  };
+
+  const retrieveMutedEffects = () => {
+    return JSON.parse(localStorage.getItem("Snapdle.Effects"));
+  };
 
   useEffect(() => {
     if (cardsList !== null && randomCard === null) {

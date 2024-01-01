@@ -10,13 +10,23 @@ import MusicOff from "../icons/MusicOff";
 import MusicOn from "../icons/MusicOn";
 
 function GameMenu() {
-  const {
-    setIsHydrated,
-    toggleMutedMusic,
-    retrieveMutedMusic,
-    toggleMutedEffects,
-    retrieveMutedEffects,
-  } = useGlobal();
+  const { setIsHydrated } = useGlobal();
+
+  const toggleMutedMusic = (param) => {
+    localStorage.setItem("Snapdle.Music", JSON.stringify(param));
+  };
+
+  const retrieveMutedMusic = () => {
+    return JSON.parse(localStorage.getItem("Snapdle.Music"));
+  };
+
+  const toggleMutedEffects = (param) => {
+    localStorage.setItem("Snapdle.Effects", JSON.stringify(param));
+  };
+
+  const retrieveMutedEffects = () => {
+    return JSON.parse(localStorage.getItem("Snapdle.Effects"));
+  };
 
   // Use useMemo to memoize the menuMusic instance
   const menuMusic = useMemo(
@@ -137,6 +147,15 @@ function GameMenu() {
                   onMouseEnter={handleBtnHover}
                 >
                   <button className="primary_cta">SKILLS MODE</button>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/pixel-mode"
+                  onClick={() => handleClickSound()}
+                  onMouseEnter={handleBtnHover}
+                >
+                  <button className="primary_cta">PIXEL MODE</button>
                 </a>
               </li>
             </ul>

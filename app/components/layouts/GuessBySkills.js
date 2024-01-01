@@ -3,7 +3,6 @@ import { useGlobal } from "@/contexts/GlobalContext";
 import styles from "@/styles/modules/guess-by-hint.module.css";
 import GameDashboard from "../utils/GameDashboard";
 import GameAutoSuggest from "../utils/GameAutoSuggest";
-import GameImageHint from "../utils/GameImageHint";
 import GameLoseModal from "../utils/GameLoseModal";
 import MusicOff from "../icons/MusicOff";
 import MusicOn from "../icons/MusicOn";
@@ -13,16 +12,23 @@ import Return from "../icons/Return";
 import GameSkillHint from "../utils/GameSkillHint";
 
 function GuessBySkills() {
-  const {
-    cardsList,
-    randomCard,
-    setRandomCard,
-    userLoses,
-    toggleMutedMusic,
-    retrieveMutedMusic,
-    toggleMutedEffects,
-    retrieveMutedEffects,
-  } = useGlobal();
+  const { cardsList, randomCard, setRandomCard, userLoses } = useGlobal();
+
+  const toggleMutedMusic = (param) => {
+    localStorage.setItem("Snapdle.Music", JSON.stringify(param));
+  };
+
+  const retrieveMutedMusic = () => {
+    return JSON.parse(localStorage.getItem("Snapdle.Music"));
+  };
+
+  const toggleMutedEffects = (param) => {
+    localStorage.setItem("Snapdle.Effects", JSON.stringify(param));
+  };
+
+  const retrieveMutedEffects = () => {
+    return JSON.parse(localStorage.getItem("Snapdle.Effects"));
+  };
 
   useEffect(() => {
     if (cardsList !== null && randomCard === null) {
