@@ -4,40 +4,30 @@ import styles from "@/styles/modules/guess-by-hint.module.css";
 import GameDashboard from "../utils/GameDashboard";
 import GameAutoSuggest from "../utils/GameAutoSuggest";
 import GameLoseModal from "../utils/GameLoseModal";
-import MusicOff from "../icons/MusicOff";
 import MusicOn from "../icons/MusicOn";
-import SoundOff from "../icons/SoundOff";
 import SoundOn from "../icons/SoundOn";
 import Return from "../icons/Return";
 import GamePixelHint from "../utils/GamePixelHint";
+import Link from "next/link";
 
 function GuessByPixel() {
-  const { cardsList, randomCard, setRandomCard, userLoses } = useGlobal();
+  const {
+    cardsList,
+    randomCard,
+    setRandomCard,
+    userLoses,
+    areEffectsMuted,
+    setAreEffectsMuted,
+    isMusicMuted,
+    setIsMusicMuted,
+  } = useGlobal();
 
-  const toggleMutedMusic = (param) => {
-    localStorage.setItem("Snapdle.Music", JSON.stringify(param));
+  const toggleMutedMusic = () => {
+    setIsMusicMuted((prev) => !prev);
   };
 
-  const retrieveMutedMusic = () => {
-    if (typeof localStorage !== "undefined") {
-      return JSON.parse(localStorage.getItem("Snapdle.Music"));
-    } else {
-      console.log("Web storage is not supported in this enviroment");
-      return false;
-    }
-  };
-
-  const toggleMutedEffects = (param) => {
-    localStorage.setItem("Snapdle.Effects", JSON.stringify(param));
-  };
-
-  const retrieveMutedEffects = () => {
-    if (typeof localStorage !== "undefined") {
-      return JSON.parse(localStorage.getItem("Snapdle.Effects"));
-    } else {
-      console.log("Web storage is not supported in this enviroment");
-      return false;
-    }
+  const toggleMutedEffects = () => {
+    setAreEffectsMuted((prev) => !prev);
   };
 
   useEffect(() => {
@@ -62,7 +52,7 @@ function GuessByPixel() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    if (!retrieveMutedMusic()) {
+    if (!isMusicMuted) {
       menuMusic.play();
       setIsPlaying(true);
     }
@@ -75,12 +65,10 @@ function GuessByPixel() {
   const handleMusicToggle = () => {
     if (isPlaying) {
       menuMusic.stop();
-      toggleMutedMusic(true);
-      setIsMusicMuted(true);
+      toggleMutedMusic();
     } else {
       menuMusic.play();
-      toggleMutedMusic(false);
-      setIsMusicMuted(false);
+      toggleMutedMusic();
     }
     setIsPlaying(!isPlaying);
   };
@@ -101,7 +89,7 @@ function GuessByPixel() {
   );
 
   const handleClickSound = (callback) => {
-    if (!retrieveMutedEffects()) {
+    if (!areEffectsMuted) {
       clickSound.play();
     }
 
@@ -120,26 +108,14 @@ function GuessByPixel() {
   );
 
   const handleBtnHover = () => {
-    if (!retrieveMutedEffects()) {
+    if (!areEffectsMuted) {
       hoverSound.play();
     }
   };
 
   const handleEffectsToggle = () => {
-    if (retrieveMutedEffects()) {
-      toggleMutedEffects(false);
-      setAreEffectsMuted(false);
-    } else {
-      toggleMutedEffects(true);
-      setAreEffectsMuted(true);
-    }
+    toggleMutedEffects();
   };
-
-  const [areEffectsMuted, setAreEffectsMuted] = useState(
-    retrieveMutedEffects()
-  );
-
-  const [isMusicMuted, setIsMusicMuted] = useState(retrieveMutedMusic());
 
   return (
     <section className={styles.wrapper}>
@@ -160,8 +136,13 @@ function GuessByPixel() {
                   onClick={() => handleClickSound(handleMusicToggle)}
                   onMouseEnter={handleBtnHover}
                 >
-                  <button className="primary_cta">
-                    {isMusicMuted ? <MusicOff /> : <MusicOn />}
+                  <button
+                    className="primary_cta"
+                    style={{
+                      filter: isMusicMuted ? "grayscale(1)" : "grayscale(0)",
+                    }}
+                  >
+                    <MusicOn />
                   </button>
                 </span>
               </li>
@@ -170,13 +151,18 @@ function GuessByPixel() {
                   onClick={() => handleClickSound(handleEffectsToggle)}
                   onMouseEnter={handleBtnHover}
                 >
-                  <button className="primary_cta">
-                    {areEffectsMuted ? <SoundOff /> : <SoundOn />}
+                  <button
+                    className="primary_cta"
+                    style={{
+                      filter: areEffectsMuted ? "grayscale(1)" : "grayscale(0)",
+                    }}
+                  >
+                    <SoundOn />
                   </button>
                 </span>
               </li>
               <li>
-                <a
+                <Link
                   href="/"
                   onClick={() => handleClickSound()}
                   onMouseEnter={handleBtnHover}
@@ -184,7 +170,7 @@ function GuessByPixel() {
                   <button className="primary_cta">
                     <Return />
                   </button>
-                </a>
+                </Link>
               </li>
             </ul>
             <div className={styles.game_container}>

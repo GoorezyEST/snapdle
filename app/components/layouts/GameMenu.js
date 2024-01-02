@@ -2,40 +2,26 @@ import { useGlobal } from "@/contexts/GlobalContext";
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "@/styles/modules/game-menu.module.css";
 import MainLogo from "../brand-assets/MainLogo";
-import Button from "../utils/Button";
 import { Howl } from "howler";
-import SoundOff from "../icons/SoundOff";
 import SoundOn from "../icons/SoundOn";
-import MusicOff from "../icons/MusicOff";
 import MusicOn from "../icons/MusicOn";
+import Link from "next/link";
 
 function GameMenu() {
-  const { setIsHydrated } = useGlobal();
+  const {
+    setIsHydrated,
+    areEffectsMuted,
+    setAreEffectsMuted,
+    isMusicMuted,
+    setIsMusicMuted,
+  } = useGlobal();
 
-  const toggleMutedMusic = (param) => {
-    localStorage.setItem("Snapdle.Music", JSON.stringify(param));
+  const toggleMutedMusic = () => {
+    setIsMusicMuted((prev) => !prev);
   };
 
-  const retrieveMutedMusic = () => {
-    if (typeof localStorage !== "undefined") {
-      return JSON.parse(localStorage.getItem("Snapdle.Music"));
-    } else {
-      console.log("Web storage is not supported in this enviroment");
-      return false;
-    }
-  };
-
-  const toggleMutedEffects = (param) => {
-    localStorage.setItem("Snapdle.Effects", JSON.stringify(param));
-  };
-
-  const retrieveMutedEffects = () => {
-    if (typeof localStorage !== "undefined") {
-      return JSON.parse(localStorage.getItem("Snapdle.Effects"));
-    } else {
-      console.log("Web storage is not supported in this enviroment");
-      return false;
-    }
+  const toggleMutedEffects = () => {
+    setAreEffectsMuted((prev) => !prev);
   };
 
   // Use useMemo to memoize the menuMusic instance
@@ -54,7 +40,7 @@ function GameMenu() {
   useEffect(() => {
     setIsHydrated(true);
 
-    if (!retrieveMutedMusic()) {
+    if (!isMusicMuted) {
       menuMusic.play();
       setIsPlaying(true);
     }
@@ -67,24 +53,16 @@ function GameMenu() {
   const handleMusicToggle = () => {
     if (isPlaying) {
       menuMusic.stop();
-      toggleMutedMusic(true);
-      setIsMusicMuted(true);
+      toggleMutedMusic();
     } else {
       menuMusic.play();
-      toggleMutedMusic(false);
-      setIsMusicMuted(false);
+      toggleMutedMusic();
     }
     setIsPlaying(!isPlaying);
   };
 
   const handleEffectsToggle = () => {
-    if (retrieveMutedEffects()) {
-      toggleMutedEffects(false);
-      setAreEffectsMuted(false);
-    } else {
-      toggleMutedEffects(true);
-      setAreEffectsMuted(true);
-    }
+    toggleMutedEffects();
   };
 
   const clickSound = useMemo(
@@ -97,7 +75,7 @@ function GameMenu() {
   );
 
   const handleClickSound = (callback) => {
-    if (!retrieveMutedEffects()) {
+    if (!areEffectsMuted) {
       clickSound.play();
     }
 
@@ -116,16 +94,10 @@ function GameMenu() {
   );
 
   const handleBtnHover = () => {
-    if (!retrieveMutedEffects()) {
+    if (!areEffectsMuted) {
       hoverSound.play();
     }
   };
-
-  const [areEffectsMuted, setAreEffectsMuted] = useState(
-    retrieveMutedEffects()
-  );
-
-  const [isMusicMuted, setIsMusicMuted] = useState(retrieveMutedMusic());
 
   return (
     <section className={styles.wrapper}>
@@ -142,31 +114,31 @@ function GameMenu() {
             </div>
             <ul className={styles.menu_modes}>
               <li>
-                <a
+                <Link
                   href="/classic-mode"
                   onClick={() => handleClickSound()}
                   onMouseEnter={handleBtnHover}
                 >
                   <button className="primary_cta">CLASSIC MODE</button>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/skills-mode"
                   onClick={() => handleClickSound()}
                   onMouseEnter={handleBtnHover}
                 >
                   <button className="primary_cta">SKILLS MODE</button>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/pixel-mode"
                   onClick={() => handleClickSound()}
                   onMouseEnter={handleBtnHover}
                 >
                   <button className="primary_cta">PIXEL MODE</button>
-                </a>
+                </Link>
               </li>
             </ul>
             <ul className={styles.menu_settings}>
@@ -175,8 +147,13 @@ function GameMenu() {
                   onClick={() => handleClickSound(handleMusicToggle)}
                   onMouseEnter={handleBtnHover}
                 >
-                  <button className="primary_cta">
-                    {isMusicMuted ? <MusicOff /> : <MusicOn />}
+                  <button
+                    className="primary_cta"
+                    style={{
+                      filter: isMusicMuted ? "grayscale(1)" : "grayscale(0)",
+                    }}
+                  >
+                    <MusicOn />
                   </button>
                 </span>
               </li>
@@ -185,8 +162,13 @@ function GameMenu() {
                   onClick={() => handleClickSound(handleEffectsToggle)}
                   onMouseEnter={handleBtnHover}
                 >
-                  <button className="primary_cta">
-                    {areEffectsMuted ? <SoundOff /> : <SoundOn />}
+                  <button
+                    className="primary_cta"
+                    style={{
+                      filter: areEffectsMuted ? "grayscale(1)" : "grayscale(0)",
+                    }}
+                  >
+                    <SoundOn />
                   </button>
                 </span>
               </li>

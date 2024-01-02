@@ -170,60 +170,9 @@ export function GlobalProvider({ children }) {
     }),
   };
 
-  // Function to check if localStorage is available
-  const isLocalStorageAvailable = () => {
-    try {
-      const testKey = "__test__";
-      localStorage.setItem(testKey, testKey);
-      localStorage.removeItem(testKey);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
+  const [areEffectsMuted, setAreEffectsMuted] = useState(false);
 
-  // Use the isLocalStorageAvailable function before accessing localStorage
-  const toggleMutedMusic = (param) => {
-    if (isLocalStorageAvailable()) {
-      localStorage.setItem("Snapdle.Music", JSON.stringify(param));
-    }
-  };
-
-  const retrieveMutedMusic = () => {
-    if (isLocalStorageAvailable()) {
-      return JSON.parse(localStorage.getItem("Snapdle.Music"));
-    }
-  };
-
-  const toggleMutedEffects = (param) => {
-    if (isLocalStorageAvailable()) {
-      localStorage.setItem("Snapdle.Effects", JSON.stringify(param));
-    }
-  };
-
-  const retrieveMutedEffects = () => {
-    if (isLocalStorageAvailable()) {
-      return JSON.parse(localStorage.getItem("Snapdle.Effects"));
-    }
-  };
-
-  useEffect(() => {
-    let musicKey =
-      isLocalStorageAvailable() &&
-      localStorage.getItem("Snapdle.Music") !== null;
-
-    if (!musicKey) {
-      toggleMutedMusic(false);
-    }
-
-    let effectsKey =
-      isLocalStorageAvailable() &&
-      localStorage.getItem("Snapdle.Effects") !== null;
-
-    if (!effectsKey) {
-      toggleMutedEffects(false);
-    }
-  }, []);
+  const [isMusicMuted, setIsMusicMuted] = useState(false);
 
   return (
     <GlobalContext.Provider
@@ -258,11 +207,11 @@ export function GlobalProvider({ children }) {
         setUserLoses,
         handleUserRestart,
         songsAndEffects,
-        toggleMutedMusic,
-        retrieveMutedMusic,
-        toggleMutedEffects,
-        retrieveMutedEffects,
         setGuessedCardsMap,
+        areEffectsMuted,
+        setAreEffectsMuted,
+        isMusicMuted,
+        setIsMusicMuted,
       }}
     >
       {children}
