@@ -19,7 +19,12 @@ function GuessByPixel() {
   };
 
   const retrieveMutedMusic = () => {
-    return JSON.parse(localStorage.getItem("Snapdle.Music"));
+    if (typeof localStorage !== "undefined") {
+      return JSON.parse(localStorage.getItem("Snapdle.Music"));
+    } else {
+      console.log("Web storage is not supported in this enviroment");
+      return false;
+    }
   };
 
   const toggleMutedEffects = (param) => {
@@ -27,7 +32,12 @@ function GuessByPixel() {
   };
 
   const retrieveMutedEffects = () => {
-    return JSON.parse(localStorage.getItem("Snapdle.Effects"));
+    if (typeof localStorage !== "undefined") {
+      return JSON.parse(localStorage.getItem("Snapdle.Effects"));
+    } else {
+      console.log("Web storage is not supported in this enviroment");
+      return false;
+    }
   };
 
   useEffect(() => {
