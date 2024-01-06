@@ -97,3 +97,9 @@
   height: auto;
   /* filter: grayscale(1); */
 }
+
+@media screen and (max-width: 550px) {
+  .skill {
+    width: calc(100% - 32px);
+  }
+}

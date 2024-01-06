@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 16px;
 }
 
 .menu_container_image {
@@ -69,7 +70,65 @@
 }
 
 .menu_modes > li {
-  width: 187px;
+  width: 175px;
+}
+
+.menu_modes > li > a {
+  text-decoration: none;
+}
+
+.menu_modes > li > a > button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(
+    45deg,
+    #3a2b93 0%,
+    #513db2 20%,
+    #513db2 80%,
+    #3a2b93 100%
+  );
+  box-shadow: none;
+  transition: box-shadow 200ms ease-in-out;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+}
+
+.menu_modes > li > a > button:hover {
+  box-shadow: 0 0 8px rgba(122, 102, 218, 0.25),
+    0 0 16px rgba(141, 124, 224, 0.45);
+}
+
+.menu_modes > li > a > button > div {
+  background: linear-gradient(
+    45deg,
+    #17113b 0%,
+    #201847 20%,
+    #201847 80%,
+    #17113b 100%
+  );
+  height: 48px;
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu_modes > li > a > button > div > svg {
+  height: 24px;
+  width: auto;
+}
+
+.menu_modes > li > a > button > span {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: calc(16px * 1.2);
 }
 
 .menu_settings {
@@ -95,4 +154,38 @@
 
 .menu_settings > li > span > button > svg > path {
   fill: var(--white);
+}
+
+@media screen and (max-width: 550px) {
+  .menu_container {
+    width: auto;
+  }
+
+  .menu {
+    padding: 16px;
+  }
+
+  .menu_logo {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .menu_container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 240px) {
+  .menu_modes > li {
+    width: 100%;
+  }
+
+  .menu {
+    gap: 16px;
+  }
+
+  .menu_logo {
+    width: 100%;
+  }
 }

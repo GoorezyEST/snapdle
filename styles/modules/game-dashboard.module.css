@@ -91,3 +91,11 @@
     fill: black;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .information {
+    width: calc(100% - 32px);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

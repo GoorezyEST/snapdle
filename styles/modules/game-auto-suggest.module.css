@@ -36,3 +36,9 @@
   width: 100%;
   padding: 4px 8px;
 }
+
+@media screen and (max-width: 550px) {
+  .autosuggest {
+    width: calc(100% - 32px);
+  }
+}

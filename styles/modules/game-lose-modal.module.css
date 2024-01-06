@@ -129,3 +129,52 @@
   cursor: pointer;
   transition: all 200ms ease-in-out;
 }
+
+.mobile_gg {
+  display: none;
+}
+
+@media screen and (max-width: 550px) {
+  .lose,
+  .share {
+    width: calc(100% - 32px);
+    padding: 16px;
+  }
+
+  .lose_gg {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .lose_gg > svg {
+    width: 165px;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .info_text {
+    width: 100%;
+  }
+
+  .lose_ctas {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 235px) {
+  .lose_gg {
+    display: none;
+  }
+
+  .mobile_gg {
+    display: block;
+    font-size: 24px;
+    line-height: calc(24px * 1.2);
+    margin-bottom: 18px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--white);
+  }
+}
