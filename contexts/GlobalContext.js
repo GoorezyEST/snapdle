@@ -40,6 +40,7 @@ export function GlobalProvider({ children }) {
     placeholder: "Type a name",
     value,
     onChange: (_, { newValue }) => setValue(newValue),
+    disabled: userLoses,
   };
   // Set the suggestions when input changes
   const onSuggestionsFetchRequested = ({ value }) => {
@@ -55,7 +56,7 @@ export function GlobalProvider({ children }) {
 
     if (suggestion.cid === randomCard.cid) {
       // Update the guessed cards map
-      if (!retrieveMutedEffects()) {
+      if (!areEffectsMuted) {
         songsAndEffects.correctAnswerEffect.play();
       }
 
@@ -74,7 +75,7 @@ export function GlobalProvider({ children }) {
       }, 1000);
     }
     if (suggestion.cid !== randomCard.cid) {
-      if (!retrieveMutedEffects()) {
+      if (!areEffectsMuted) {
         songsAndEffects.gameLose.play();
       }
 
