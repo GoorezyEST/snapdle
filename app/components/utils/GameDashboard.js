@@ -16,7 +16,7 @@ function GameDashboard() {
     setRandomCard,
     guessedCardsMap,
     setGuessedCardsMap,
-    retrieveMutedEffects,
+    areEffectsMuted,
   } = useGlobal();
 
   const generateRandomCard = () => {
@@ -42,7 +42,7 @@ function GameDashboard() {
   );
 
   const handleClickSound = (callback) => {
-    if (!retrieveMutedEffects()) {
+    if (!areEffectsMuted) {
       clickSound.play();
     }
 
@@ -61,7 +61,7 @@ function GameDashboard() {
   );
 
   const handleBtnHover = () => {
-    if (!retrieveMutedEffects()) {
+    if (!areEffectsMuted) {
       hoverSound.play();
     }
   };
