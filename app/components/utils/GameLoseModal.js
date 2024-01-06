@@ -6,7 +6,7 @@ import { copy } from "clipboard";
 import GGWPIcon from "../brand-assets/GG-WP";
 
 function GameLoseModal() {
-  const { streak, randomCard, handleUserRestart, retrieveMutedEffects } =
+  const { streak, randomCard, handleUserRestart, areEffectsMuted } =
     useGlobal();
 
   const clickSound = useMemo(
@@ -19,7 +19,7 @@ function GameLoseModal() {
   );
 
   const handleClickSound = (callback) => {
-    if (!retrieveMutedEffects()) {
+    if (!areEffectsMuted) {
       clickSound.play();
     }
 
@@ -38,12 +38,14 @@ function GameLoseModal() {
   );
 
   const handleBtnHover = () => {
-    if (!retrieveMutedEffects()) {
+    if (!areEffectsMuted) {
       hoverSound.play();
     }
   };
 
   const [copied, setCopied] = useState(false);
+
+  const partOfText = `I got a streak of ${streak} guesses in Snapdle!`;
 
   const textToCopy = `I got a streak of ${streak} guesses in Snapdle!\nhttps://game-snapdle.vercel.app/`;
 
@@ -63,6 +65,7 @@ function GameLoseModal() {
         <div className={styles.lose_gg}>
           <GGWPIcon />
         </div>
+        <h1 className={styles.mobile_gg}>GG WP</h1>
         <p className={styles.info_text}>
           You got a streak of <span>{streak}</span> guesses!
         </p>
@@ -77,7 +80,7 @@ function GameLoseModal() {
               onClick={() => handleClickSound(handleUserRestart)}
               onMouseEnter={handleBtnHover}
             >
-              <button className="primary_cta">PLAY AGAIN</button>
+              <button className="primary_cta">RESTART</button>
             </span>
           </span>
           <span>
@@ -94,9 +97,7 @@ function GameLoseModal() {
       <div className={styles.share}>
         <h2>Share it with your friends:</h2>
         <div className={styles.share_text}>
-          {textToCopy.split("\n").map((part, index) => (
-            <p key={index}>{part}</p>
-          ))}
+          <p>{partOfText}</p>
         </div>
         <button
           onClick={handleCopyClick}
