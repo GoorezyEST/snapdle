@@ -6,6 +6,10 @@ import { Howl } from "howler";
 import SoundOn from "../icons/SoundOn";
 import MusicOn from "../icons/MusicOn";
 import Link from "next/link";
+import ClassicGameMode from "@/app/classic-mode/page";
+import ClassicModeIcon from "../icons/ClassicModeIcon";
+import SkillModeIcon from "../icons/SkillModeIcon";
+import PixelModeIcon from "../icons/PixelModeIcon";
 
 function GameMenu() {
   const {
@@ -119,16 +123,12 @@ function GameMenu() {
                   onClick={() => handleClickSound()}
                   onMouseEnter={handleBtnHover}
                 >
-                  <button className="primary_cta">CLASSIC MODE</button>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/skills-mode"
-                  onClick={() => handleClickSound()}
-                  onMouseEnter={handleBtnHover}
-                >
-                  <button className="primary_cta">SKILLS MODE</button>
+                  <button>
+                    <div>
+                      <ClassicModeIcon />
+                    </div>
+                    <span>CLASSIC</span>
+                  </button>
                 </Link>
               </li>
               <li>
@@ -137,7 +137,26 @@ function GameMenu() {
                   onClick={() => handleClickSound()}
                   onMouseEnter={handleBtnHover}
                 >
-                  <button className="primary_cta">PIXEL MODE</button>
+                  <button>
+                    <div>
+                      <PixelModeIcon />
+                    </div>
+                    <span>PIXEL</span>
+                  </button>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/skills-mode"
+                  onClick={() => handleClickSound()}
+                  onMouseEnter={handleBtnHover}
+                >
+                  <button>
+                    <div>
+                      <SkillModeIcon />
+                    </div>
+                    <span>SKILLS</span>
+                  </button>
                 </Link>
               </li>
             </ul>
