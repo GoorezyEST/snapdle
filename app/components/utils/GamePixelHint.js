@@ -6,34 +6,35 @@ import styles from "@/styles/modules/game-pixel-hint.module.css";
 function GamePixelHint() {
   const { wasGuessed, randomCard } = useGlobal();
 
-  const [guessComment, setGuessComment] = useState("Nice one");
+  const [bgImageLoaded, setBgImageLoaded] = useState(false);
 
-  const congratulationsMessages = [
-    "Nice one",
-    "Amazing",
-    "You nailed it",
-    "Fantastic",
-    "Wow",
-    "Well played",
-    "Nice guess",
-  ];
-
-  const getRandomMessage = () => {
-    const randomIndex = Math.floor(
-      Math.random() * congratulationsMessages.length
-    );
-    return congratulationsMessages[randomIndex];
-  };
-
+  //useEffect to handle the image loading
   useEffect(() => {
-    if (wasGuessed) {
-      const randomMessage = getRandomMessage();
-      setGuessComment(randomMessage);
-    }
-  }, [wasGuessed]);
+    setBgImageLoaded(false);
+
+    const image = new Image();
+
+    const handleLoadImage = () => {
+      setBgImageLoaded(true);
+    };
+
+    image.src = randomCard.art;
+
+    image.onload = handleLoadImage;
+
+    return () => {
+      image.onload = null;
+    };
+  }, [randomCard.art]);
 
   return (
     <div className={styles.image_container}>
+      <div
+        className={styles.image_loading}
+        style={{ opacity: bgImageLoaded ? "0" : "1" }}
+      >
+        <span class={styles.image_loading_loader}></span>
+      </div>
       <img
         src={randomCard.art}
         alt="Random card"
@@ -41,6 +42,7 @@ function GamePixelHint() {
           transform: wasGuessed
             ? "translate(-50%, -50%) scale(1)"
             : " translate(-50%, -50%) scale(7)",
+          opacity: bgImageLoaded ? "1" : "0",
         }}
       />
     </div>

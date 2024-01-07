@@ -6,7 +6,7 @@
 
 :root {
   --black: hsla(257, 78%, 7%, 1);
-  --black-op: hsla(257, 78%, 7%, 0.75);
+  --black-op: hsla(257, 78%, 7%, 0.5);
   --white: hsla(227, 46%, 97%, 1);
   --accent-light: hsla(250, 52%, 45%, 1);
   --accent: rgb(77, 46, 236);
@@ -87,6 +87,27 @@ span {
 .secondary_cta:hover {
   box-shadow: 0 0 8px rgba(122, 102, 218, 0.25),
     0 0 16px rgba(141, 124, 224, 0.45);
+}
+
+.menu_container_loading_image {
+  position: absolute;
+  z-index: 30;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #201557 20%, #191044 50%, #120b30 80%);
+}
+
+.game_loading_wrapper {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #201557 20%, #191044 50%, #120b30 80%);
+}
+
+.game_loading_wrapper > span {
+  color: var(--white);
+  font-size: 16px;
+  line-height: calc(16px * 1.2);
+  font-weight: 400;
 }
 
 /* LOADING SCREEN STYLING */

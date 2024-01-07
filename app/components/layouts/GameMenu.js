@@ -6,7 +6,6 @@ import { Howl } from "howler";
 import SoundOn from "../icons/SoundOn";
 import MusicOn from "../icons/MusicOn";
 import Link from "next/link";
-import ClassicGameMode from "@/app/classic-mode/page";
 import ClassicModeIcon from "../icons/ClassicModeIcon";
 import SkillModeIcon from "../icons/SkillModeIcon";
 import PixelModeIcon from "../icons/PixelModeIcon";
@@ -103,9 +102,32 @@ function GameMenu() {
     }
   };
 
+  const [bgImageLoaded, setBgImageLoaded] = useState(false);
+
+  //useEffect to handle the image loading
+  useEffect(() => {
+    const image = new Image();
+
+    const handleLoadImage = () => {
+      setBgImageLoaded(true);
+    };
+
+    image.src = "https://i.imgur.com/P63TZaA.jpg";
+
+    image.onload = handleLoadImage;
+
+    return () => {
+      image.onload = null;
+    };
+  }, []);
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.menu_container_wrapper}>
+        <div
+          className="menu_container_loading_image"
+          style={{ display: bgImageLoaded ? "none" : "auto" }}
+        ></div>
         <img
           className={styles.menu_container_image}
           src="https://i.imgur.com/P63TZaA.jpg"

@@ -20,6 +20,9 @@ function GuessBySkills() {
     setAreEffectsMuted,
     isMusicMuted,
     setIsMusicMuted,
+    initialHP,
+    setHp,
+    generateRandomCard,
   } = useGlobal();
 
   const toggleMutedMusic = () => {
@@ -59,6 +62,8 @@ function GuessBySkills() {
 
     return () => {
       menuMusic.stop();
+      setHp(initialHP);
+      generateRandomCard();
     };
   }, []);
 
@@ -117,6 +122,25 @@ function GuessBySkills() {
     toggleMutedEffects();
   };
 
+  const [bgImageLoaded, setBgImageLoaded] = useState(false);
+
+  //useEffect to handle the image loading
+  useEffect(() => {
+    const image = new Image();
+
+    const handleLoadImage = () => {
+      setBgImageLoaded(true);
+    };
+
+    image.src = "https://i.imgur.com/P63TZaA.jpg";
+
+    image.onload = handleLoadImage;
+
+    return () => {
+      image.onload = null;
+    };
+  }, []);
+
   return (
     <section className={styles.wrapper}>
       {randomCard === null ? (
@@ -125,6 +149,10 @@ function GuessBySkills() {
         <div className={styles.container}>
           {userLoses && <GameLoseModal />}
           <div className={styles.game_container_wrapper}>
+            <div
+              className="menu_container_loading_image"
+              style={{ display: bgImageLoaded ? "none" : "auto" }}
+            ></div>
             <img
               className={styles.game_container_image}
               src="https://i.imgur.com/P63TZaA.jpg"
