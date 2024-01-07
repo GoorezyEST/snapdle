@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 
-import { useGlobal } from "@/contexts/GlobalContext";
 import GuessBySkills from "../components/layouts/GuessBySkills";
 
 function SkillsGameMode() {

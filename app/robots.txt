@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://snapdle-game.vercel.app//sitemap.xml
