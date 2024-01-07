@@ -1,5 +1,5 @@
 export async function retrieveCards() {
-  const response = await fetch("https://game-snapdle.vercel.app/api/cards")
+  const response = await fetch("https://snapdle-game.vercel.app/api/cards")
     .then((res) => res.json())
     .catch((error) => {
       throw new Error(`Error: ${error}`);
@@ -7,3 +7,5 @@ export async function retrieveCards() {
 
   return response;
 }
+
+/*MAIN: https://game-snapdle.vercel.app/*/
