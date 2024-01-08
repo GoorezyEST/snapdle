@@ -37,6 +37,28 @@
   padding: 4px 8px;
 }
 
+@media only screen and (max-height: 499px) and (orientation: landscape) {
+  .autosuggest {
+    margin-top: 8px;
+    width: 375px;
+  }
+
+  .autosuggest > div > div:last-child {
+    max-height: 105%;
+  }
+}
+
+@media only screen and (max-height: 650px) and (orientation: landscape) {
+  .autosuggest {
+    margin-top: 8px;
+    width: 375px;
+  }
+
+  .autosuggest > div > div:last-child {
+    max-height: 175%;
+  }
+}
+
 @media screen and (max-width: 550px) {
   .autosuggest {
     width: calc(100% - 32px);

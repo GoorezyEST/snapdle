@@ -53,6 +53,21 @@
     transform: rotate(360deg);
   }
 }
+
+@media only screen and (max-height: 499px) and (orientation: landscape) {
+  .image_container {
+    height: 100px;
+    margin-bottom: 8px;
+  }
+}
+
+@media only screen and (max-height: 500px) and (orientation: landscape) {
+  .image_container {
+    height: 200px;
+    margin-bottom: 8px;
+  }
+}
+
 @media screen and (max-width: 550px) {
   .image_container {
     width: calc(100% - 32px);

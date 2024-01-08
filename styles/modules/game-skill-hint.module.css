@@ -98,6 +98,13 @@
   /* filter: grayscale(1); */
 }
 
+@media only screen and (max-height: 650px) and (orientation: landscape) {
+  .skill {
+    height: 100px;
+    margin-bottom: 8px;
+  }
+}
+
 @media screen and (max-width: 550px) {
   .skill {
     width: calc(100% - 32px);

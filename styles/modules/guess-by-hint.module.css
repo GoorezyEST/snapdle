@@ -77,6 +77,54 @@
   justify-content: center;
 }
 
+.invalid_device_wrapper {
+  background: radial-gradient(circle, #201557 20%, #191044 50%, #120b30 80%);
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invalid_device {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 75%;
+}
+
+.invalid_device > h1 {
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: calc(24px * 1.2);
+}
+
+.invalid_device > p {
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: calc(16px * 1.5);
+  margin: 8px 0 24px 0;
+}
+
+.invalid_device > a {
+  text-decoration: none;
+}
+
+.invalid_device > a > button {
+  color: var(--black);
+  background-color: var(--white);
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 6px;
+  text-align: start;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 550px) {
   .container {
     width: 100%;
