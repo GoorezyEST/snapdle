@@ -47,7 +47,7 @@ function GameLoseModal() {
 
   const partOfText = `I got a streak of ${streak} guesses in Snapdle!`;
 
-  const textToCopy = `I got a streak of ${streak} guesses in Snapdle!\nhttps://game-snapdle.vercel.app/`;
+  const textToCopy = `I got a streak of ${streak} guesses in Snapdle!\nhttps://snapdle-game.vercel.app/`;
 
   const handleCopyClick = () => {
     copy(textToCopy);
