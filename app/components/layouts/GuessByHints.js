@@ -141,11 +141,54 @@ function GuessByHints() {
     };
   }, []);
 
+  const [isViewportBelowThreshold, setIsViewportBelowThreshold] =
+    useState(false);
+
+  useEffect(() => {
+    // Function to check if viewport height is below 650px
+    const checkViewportHeight = () => {
+      const viewportHeight = window.innerHeight;
+      const threshold = 650;
+      const belowThreshold = viewportHeight < threshold;
+
+      setIsViewportBelowThreshold(belowThreshold);
+    };
+
+    // Initial check when component mounts
+    checkViewportHeight();
+
+    // Event listener for window resize
+    const handleResize = () => {
+      checkViewportHeight();
+    };
+
+    // Attach resize event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <section className={styles.wrapper}>
       {randomCard === null ? (
         <div className="game_loading_wrapper">
           <span>...</span>
+        </div>
+      ) : isViewportBelowThreshold ? (
+        <div className={styles.invalid_device_wrapper}>
+          <div className={styles.invalid_device}>
+            <h1>Ups...</h1>
+            <p>
+              We regret to inform you that this game mode does not work in this
+              resolution.
+            </p>
+            <Link href="/">
+              <button>Go back</button>
+            </Link>
+          </div>
         </div>
       ) : (
         <div className={styles.container}>
