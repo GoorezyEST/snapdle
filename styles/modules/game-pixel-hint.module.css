@@ -54,16 +54,16 @@
   }
 }
 
-@media only screen and (max-height: 499px) and (orientation: landscape) {
+@media only screen and (max-height: 630px) and (orientation: landscape) {
   .image_container {
-    height: 100px;
+    height: 200px;
     margin-bottom: 8px;
   }
 }
 
-@media only screen and (max-height: 500px) and (orientation: landscape) {
+@media only screen and (max-height: 499px) and (orientation: landscape) {
   .image_container {
-    height: 200px;
+    height: 100px;
     margin-bottom: 8px;
   }
 }

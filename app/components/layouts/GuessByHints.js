@@ -148,7 +148,7 @@ function GuessByHints() {
     // Function to check if viewport height is below 650px
     const checkViewportHeight = () => {
       const viewportHeight = window.innerHeight;
-      const threshold = 650;
+      const threshold = 630;
       const belowThreshold = viewportHeight < threshold;
 
       setIsViewportBelowThreshold(belowThreshold);

@@ -48,7 +48,7 @@
   }
 }
 
-@media only screen and (max-height: 650px) and (orientation: landscape) {
+@media only screen and (max-height: 630px) and (orientation: landscape) {
   .autosuggest {
     margin-top: 8px;
     width: 375px;

@@ -134,6 +134,25 @@
   display: none;
 }
 
+@media only screen and (max-height: 405px) and (orientation: landscape) {
+  .share {
+    display: none;
+  }
+}
+
+@media only screen and (max-height: 525px) and (orientation: landscape) {
+  .lose,
+  .share {
+    width: calc(100% - 32px);
+    padding: 16px;
+  }
+
+  .lose_gg {
+    width: 80px;
+    margin-bottom: 8px;
+  }
+}
+
 @media screen and (max-width: 550px) {
   .lose,
   .share {
