@@ -4,6 +4,7 @@ import styles from "@/styles/modules/game-lose-modal.module.css";
 import { useGlobal } from "@/contexts/GlobalContext";
 import { copy } from "clipboard";
 import GGWPIcon from "../brand-assets/GG-WP";
+import { usePathname } from "next/navigation";
 
 function GameLoseModal() {
   const { streak, randomCard, handleUserRestart, areEffectsMuted } =
@@ -45,9 +46,26 @@ function GameLoseModal() {
 
   const [copied, setCopied] = useState(false);
 
-  const partOfText = `I got a streak of ${streak} guesses in Snapdle!`;
+  const currentPath = usePathname();
 
-  const textToCopy = `I got a streak of ${streak} guesses in Snapdle!\nhttps://snapdle-game.vercel.app/`;
+  const transformPath = (input) => {
+    const transformedString = input.replace(/^\//, "").replace(/-/g, " ");
+
+    const capitalizedString = transformedString.replace(
+      /\b\w/g,
+      (firstLetter) => firstLetter.toUpperCase()
+    );
+
+    return capitalizedString;
+  };
+
+  const partOfText = `I got a streak of ${streak} guesses in the "${transformPath(
+    currentPath
+  )}" of Snapdle! `;
+
+  const textToCopy = `I got a streak of ${streak} guesses in the "${transformPath(
+    currentPath
+  )}" of Snapdle!\nhttps://snapdle-game.vercel.app/`;
 
   const handleCopyClick = () => {
     copy(textToCopy);
