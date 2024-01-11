@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Snapdle Logo SVG](https://i.imgur.com/MKbPWBM.png)
 
-## Getting Started
+# Snapdle
 
-First, run the development server:
+Snapdle: A video game developed in Next.js for browsers whose gameplay is based on guessing cards from the famous game "Marvel Snap".
 
-```bash
+## Dependencies:
+
+- "clipboard": "^2.0.11"
+- "howler": "^2.2.4"
+
+## Scripts:
+
+Compile the website locally:
+
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Compile the locally built website:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Build the website:
 
-## Learn More
+```
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Como compilar de forma local:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone this repository.
+2. Run the _npm install_ command to install all dependencies.
+3. Run the command _npm run dev_ to compile the project in development mode.
+4. The project will be in your default browser at the url: http://localhost:3000/.
