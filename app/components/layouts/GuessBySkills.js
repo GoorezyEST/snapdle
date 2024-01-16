@@ -9,6 +9,7 @@ import SoundOn from "../icons/SoundOn";
 import Return from "../icons/Return";
 import GameSkillHint from "../utils/GameSkillHint";
 import Link from "next/link";
+import GameWinsModal from "../utils/GameWinsModal";
 
 function GuessBySkills() {
   const {
@@ -23,6 +24,7 @@ function GuessBySkills() {
     initialHP,
     setHp,
     generateRandomCard,
+    userWins,
   } = useGlobal();
 
   const toggleMutedMusic = () => {
@@ -148,6 +150,7 @@ function GuessBySkills() {
       ) : (
         <div className={styles.container}>
           {userLoses && <GameLoseModal />}
+          {userWins && <GameWinsModal />}
           <div className={styles.game_container_wrapper}>
             <div
               className="menu_container_loading_image"

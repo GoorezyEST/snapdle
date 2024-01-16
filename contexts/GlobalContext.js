@@ -26,6 +26,8 @@ export function GlobalProvider({ children }) {
   const [wasGuessed, setWasGuessed] = useState(false);
   //State to trigger a modal window when the user loses the game
   const [userLoses, setUserLoses] = useState(false);
+  //State to trigger a modal window when the user wins the game
+  const [userWins, setUserWins] = useState(false);
 
   //States and fns to handle the suggestions for the AutoSuggest component
   const [value, setValue] = useState("");
@@ -70,9 +72,13 @@ export function GlobalProvider({ children }) {
       setWasGuessed(true);
 
       setTimeout(() => {
-        setWasGuessed(false);
-        generateRandomCard();
-      }, 1000);
+        if (cardsList && guessedCardsMap) {
+          if (cardsList.length !== Object.keys(guessedCardsMap).length) {
+            setWasGuessed(false);
+            generateRandomCard();
+          }
+        }
+      }, 1500);
     }
     if (suggestion.cid !== randomCard.cid) {
       if (!areEffectsMuted) {
@@ -85,7 +91,13 @@ export function GlobalProvider({ children }) {
           [suggestion.cid]: true,
         }));
 
-        generateRandomCard();
+        setTimeout(() => {
+          if (cardsList && guessedCardsMap) {
+            if (cardsList.length !== Object.keys(guessedCardsMap).length) {
+              generateRandomCard();
+            }
+          }
+        }, 1500);
       }
 
       setHp((prev) => {
@@ -109,6 +121,7 @@ export function GlobalProvider({ children }) {
       const availableCards = cardsList.filter(
         (card) => !guessedCardsMap[card.cid]
       );
+
       // Get a random card from the available cards
       const newRandomCard =
         availableCards[Math.floor(Math.random() * availableCards.length)];
@@ -145,9 +158,19 @@ export function GlobalProvider({ children }) {
     }
   }, [hp]);
 
+  //Trigger the win state when the user guess all the cards
+  useEffect(() => {
+    if (cardsList && guessedCardsMap) {
+      if (cardsList.length === Object.keys(guessedCardsMap).length) {
+        setUserWins(true);
+      }
+    }
+  }, [guessedCardsMap]);
+
   //Function to handle when the user want to restart the game
   const handleUserRestart = () => {
     setUserLoses(false);
+    setUserWins(false);
     setUsedReRoll(false);
     setHp(initialHP);
     setGuessedCardsMap({});
@@ -206,6 +229,7 @@ export function GlobalProvider({ children }) {
         setWasGuessed,
         userLoses,
         setUserLoses,
+        userWins,
         handleUserRestart,
         songsAndEffects,
         setGuessedCardsMap,

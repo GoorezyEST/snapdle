@@ -9,6 +9,7 @@ import MusicOn from "../icons/MusicOn";
 import SoundOn from "../icons/SoundOn";
 import Return from "../icons/Return";
 import Link from "next/link";
+import GameWinsModal from "../utils/GameWinsModal";
 
 function GuessByHints() {
   const {
@@ -23,6 +24,7 @@ function GuessByHints() {
     initialHP,
     setHp,
     generateRandomCard,
+    userWins,
   } = useGlobal();
 
   const toggleMutedMusic = () => {
@@ -193,6 +195,7 @@ function GuessByHints() {
       ) : (
         <div className={styles.container}>
           {userLoses && <GameLoseModal />}
+          {userWins && <GameWinsModal />}
           <div className={styles.game_container_wrapper}>
             <div
               className="menu_container_loading_image"
