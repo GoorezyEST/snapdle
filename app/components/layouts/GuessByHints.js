@@ -25,6 +25,7 @@ function GuessByHints() {
     setHp,
     generateRandomCard,
     userWins,
+    setUsedReRoll,
   } = useGlobal();
 
   const toggleMutedMusic = () => {
@@ -240,7 +241,10 @@ function GuessByHints() {
               <li>
                 <Link
                   href="/"
-                  onClick={() => handleClickSound()}
+                  onClick={() => {
+                    handleClickSound();
+                    setUsedReRoll(false);
+                  }}
                   onMouseEnter={handleBtnHover}
                 >
                   <button className="primary_cta">
